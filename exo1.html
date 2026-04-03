@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Exercice 7 - Event Delegation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 95%;
+            display: flex;
+            background-color: aqua;
+            flex-direction: column;
+            padding: 5px;
+        }
+        #add {
+            height: 60%;
+            width: 10%;
+            background-color: yellowgreen;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+        .ajbtn {
+            height: 50px;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+        }
+        #content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .comp {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+        }
+        .top {
+            height: 30px;
+            background-color: yellowgreen;
+            display: flex;
+            justify-content: end;
+            gap: 5%;
+            padding-right: 5px;
+        }
+        .txt {
+            height: 300px;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .edit, .del {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        i {
+            color: white;
+        }
+        h2 {
+            color: #333;
+            margin: 10px 0;
+        }
+        .consigne {
+            background-color: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ajbtn">
+            <button id="add">ADD NEW</button>
+        </div>
+        <div id="content">
+            
+    </div>
+
+    <script> 
+        const add = document.getElementById('add')
+        const content = document.getElementById('content')
+
+        const newCom = `
+        <div class="comp">
+                <div class="top">
+                    <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="del"><i class="fa-solid fa-trash"></i></button>
+                </div>
+                <textarea class="txt" disabled></textarea>
+            </div>
+        </div>
+        `
+
+        function newCommentaire(){
+            content.innerHTML += newCom
+        }
+
+        add.addEventListener('click',newCommentaire)
+
+        content.addEventListener('click',(e)=>{
+            const del = e.target.closest('.del');
+            if(del){
+                const comp = del.closest('.comp')
+                comp.remove()
+            }
+
+            const edit = e.target.closest('.edit')
+            if(edit){
+                const text = edit.closest('.comp').querySelector('.txt')
+                if(text.hasAttribute("disabled")){
+                    text.removeAttribute("disabled")
+                    text.focus()
+                }else{
+                    text.setAttribute("disabled", true)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

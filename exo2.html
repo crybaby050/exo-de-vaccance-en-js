@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercice 12</title>
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    font-family: Arial;
+}
+.container {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    background: aqua;
+    padding: 20px;
+}
+.divs-container {
+    display: flex;
+    gap: 20px;
+}
+.left, .right {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    min-height: 200px;
+}
+.item {
+    padding: 10px;
+    margin: 5px 0;
+    background: #eee;
+    cursor: pointer;
+}
+.item.selected {
+    background: yellowgreen;
+    color: white;
+}
+.controls {
+    margin-top: 20px;
+    text-align: center;
+}
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background: yellowgreen;
+    color: white;
+    border: none;
+}
+button:disabled {
+    background: gray;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="divs-container">
+    <div class="left" id="leftDiv">
+        <div class="item">Élément 1</div>
+        <div class="item">Élément 2</div>
+    </div>
+    <div class="right" id="rightDiv">
+        <div class="item">Élément A</div>
+        <div class="item">Élément B</div>
+    </div>
+</div>
+
+<div class="controls">
+    <button id="btnLeft">&lt;&lt;</button>
+    <button id="btnRight">&gt;&gt;</button>
+</div>
+
+</div>
+
+<script>
+const leftDiv = document.getElementById("leftDiv");
+const rightDiv = document.getElementById("rightDiv");
+const btnRight = document.getElementById("btnRight");
+const btnLeft = document.getElementById("btnLeft");
+
+const items = document.querySelectorAll('.item')
+
+items.forEach((item)=>{
+    item.addEventListener('click',()=>{
+        console.log(`bouton ${item.textContent} cliqué`)
+        items.forEach((e) => {e.classList.remove('selected')})
+        item.classList.add('selected')
+    })
+})
+
+btnRight.addEventListener('click',()=>{
+    const btnSelect = document.querySelector('.item.selected')
+    if(btnSelect){
+        rightDiv.appendChild(btnSelect)
+        btnSelect.classList.remove('selected')
+    }
+    desactiveBouton()
+})
+
+btnLeft.addEventListener('click',()=>{
+    const btnSelect = document.querySelector('.item.selected')
+    if(btnSelect){
+        leftDiv.appendChild(btnSelect)
+        btnSelect.classList.remove('selected')
+    }
+    desactiveBouton()
+})
+
+function desactiveBouton() {
+    if (leftDiv.querySelectorAll('.item').length === 0) {
+        btnRight.setAttribute('disabled', true)
+    } else {
+        btnRight.removeAttribute('disabled')
+    }
+
+    if (rightDiv.querySelectorAll('.item').length === 0) {
+        btnLeft.setAttribute('disabled', true)
+    } else {
+        btnLeft.removeAttribute('disabled')
+    }
+}
+
+
+
+
+
+</script>
+
+</body>
+</html>
