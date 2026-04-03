@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 2 - Création d'éléments</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eaecef;
+        }
+
+        h1 {
+            color: #0d1117;
+            margin-bottom: 20px;
+        }
+
+        .consignes {
+            background: #f6f8fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #0969da;
+        }
+
+        .consignes ul {
+            margin-left: 20px;
+            color: #24292f;
+        }
+
+        .consignes li {
+            margin: 8px 0;
+        }
+
+        button {
+            background: #0969da;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background: #0960c0;
+        }
+
+        .boite {
+            width: 100px;
+            height: 100px;
+            /*background: #0969da;*/
+            margin: 10px;
+            display: inline-block;
+            border-radius: 8px;
+        }
+
+        #conteneur-boites {
+            min-height: 130px;
+            margin-top: 20px;
+            padding: 10px;
+            background: #f6f8fa;
+            border-radius: 8px;
+            border: 1px solid #eaecef;
+        }
+
+        .solution {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eaecef;
+        }
+
+        .solution details {
+            background: #f6f8fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .solution pre {
+            background: #1e1e2e;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Exercice 2 : Création d'éléments</h1>
+
+        <div class="consignes">
+            <strong>Consignes :</strong>
+            <ul>
+                <li>Au clic sur "Ajouter une boîte", créez une nouvelle div avec la classe "boite"</li>
+                <li>Ajoutez cette boîte dans le conteneur "conteneur-boites"</li>
+                <li>Au clic sur "Supprimer la dernière", retirez la dernière boîte</li>
+                <li>Au clic sur "Supprimer tout", videz complètement le conteneur</li>
+            </ul>
+        </div>
+
+        <button id="btn-ajouter">Ajouter une boîte</button>
+        <button id="btn-supprimer-dernier">Supprimer la dernière</button>
+        <button id="btn-supprimer-tout">Supprimer tout</button>
+
+        <div id="conteneur-boites"></div>
+
+
+        <script>
+            // À compléter par l'élève
+            const conteneur = document.getElementById('conteneur-boites');
+            const btnAjouter = document.getElementById('btn-ajouter');
+            const btnSupprimerDernier = document.getElementById('btn-supprimer-dernier');
+            const btnSupprimerTout = document.getElementById('btn-supprimer-tout');
+
+            function randomColor() {
+                const r = Math.floor(Math.random() * 256);
+                const g = Math.floor(Math.random() * 256);
+                const b = Math.floor(Math.random() * 256);
+                return `rgb(${r}, ${g}, ${b})`;
+            }
+
+
+            function nouveauBoite() {
+                const boite = document.createElement('div')
+                boite.classList.add('boite')
+                boite.style.backgroundColor = randomColor()
+                conteneur.appendChild(boite)
+            }
+
+            function delLast() {
+                const dernier = conteneur.lastElementChild
+                dernier.remove()
+            }
+
+            function deletAll(){
+                const boites = document.querySelectorAll('.boite')
+                boites.forEach(e =>{
+                    e.remove()
+                })
+            }
+
+            btnAjouter.addEventListener('click', nouveauBoite)
+            btnSupprimerDernier.addEventListener('click', delLast)
+            btnSupprimerTout.addEventListener('click',deletAll)
+        </script>
+</body>
+
+</html>
