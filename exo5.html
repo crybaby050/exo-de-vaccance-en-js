@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 3 - Manipulation des classes et styles</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #eaecef;
+        }
+        h1 {
+            color: #0d1117;
+            margin-bottom: 20px;
+        }
+        .consignes {
+            background: #f6f8fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #0969da;
+        }
+        .consignes ul {
+            margin-left: 20px;
+            color: #24292f;
+        }
+        .consignes li {
+            margin: 8px 0;
+        }
+        button {
+            background: #0969da;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background: #0960c0;
+        }
+        .carre {
+            width: 150px;
+            height: 150px;
+            background: #0969da;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+        .surbrillance {
+            box-shadow: 0 0 0 4px #ff9800;
+            transform: scale(1.05);
+        }
+        .solution {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eaecef;
+        }
+        .solution details {
+            background: #f6f8fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .solution pre {
+            background: #1e1e2e;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Exercice 3 : Manipulation des classes et styles</h1>
+        
+        <div class="consignes">
+            <strong>Consignes :</strong>
+            <ul>
+                <li>Le bouton "Activer surbrillance" doit ajouter la classe "surbrillance" au carré</li>
+                <li>Le bouton "Changer couleur" doit modifier la couleur de fond du carré en orange</li>
+                <li>Le bouton "Réinitialiser" doit enlever la classe surbrillance et remettre la couleur bleue</li>
+            </ul>
+        </div>
+
+        <div id="carre" class="carre"></div>
+        
+        <button id="btn-surbrillance">Activer surbrillance</button>
+        <button id="btn-couleur">Changer couleur</button>
+        <button id="btn-reset">Réinitialiser</button>
+
+
+    <script>
+        // À compléter par l'élève
+        const carre = document.getElementById('carre');
+        const btnSurbrillance = document.getElementById('btn-surbrillance');
+        const btnCouleur = document.getElementById('btn-couleur');
+        const btnReset = document.getElementById('btn-reset');
+
+        btnCouleur.addEventListener('click',()=>{
+            carre.style.backgroundColor = 'orange'
+        })
+        btnSurbrillance.addEventListener('click',()=>{
+            carre.style.outline = '5px solid black'
+        })
+        btnReset.addEventListener('click',()=>{
+            carre.style.outline = 'none'
+            carre.style.backgroundColor = ''
+        })
+
+
+    </script>
+</body>
+</html>
