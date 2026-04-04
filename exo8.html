@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 6 - Système d'onglets</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #eaecef;
+        }
+        h1 {
+            color: #0d1117;
+            margin-bottom: 20px;
+        }
+        .consignes {
+            background: #f6f8fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #0969da;
+        }
+        .consignes ul {
+            margin-left: 20px;
+            color: #24292f;
+        }
+        .consignes li {
+            margin: 8px 0;
+        }
+        .tabs {
+            display: flex;
+            gap: 5px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background: #f6f8fa;
+            border: 1px solid #eaecef;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+        }
+        .tab.actif {
+            background: white;
+            border-bottom: 2px solid #0969da;
+        }
+        .contenu-tab {
+            border: 1px solid #eaecef;
+            padding: 20px;
+            border-radius: 0 8px 8px 8px;
+            background: white;
+            min-height: 150px;
+        }
+        .solution {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eaecef;
+        }
+        .solution details {
+            background: #f6f8fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .solution pre {
+            background: #1e1e2e;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Exercice 6 : Système d'onglets</h1>
+        
+        <div class="consignes">
+            <strong>Consignes :</strong>
+            <ul>
+                <li>Créez un système d'onglets fonctionnel</li>
+                <li>Au clic sur un onglet, celui-ci devient actif (classe "actif")</li>
+                <li>Le contenu correspondant à l'onglet doit s'afficher</li>
+                <li>Les données des onglets sont dans le tableau "onglets" et "contenus"</li>
+            </ul>
+        </div>
+
+        <div id="zone-onglets"></div>
+
+    <script>
+        // À compléter par l'élève
+        const zone = document.getElementById('zone-onglets');
+        const onglets = ['Accueil', 'Profil', 'Paramètres'];
+        const contenus = [
+            'Contenu de la page d\'accueil',
+            'Informations du profil utilisateur',
+            'Préférences et paramètres'
+        ];
+
+        let html = '<div class="tabs">';
+        onglets.forEach(function(nom, i) {
+            html += `<div class="tab" data-index="${i}">${nom}</div>`;
+        });
+        html += '</div><div class="contenu-tab" id="contenu"></div>';
+        zone.innerHTML = html;
+
+        const contenuDiv = document.getElementById('contenu');
+        contenuDiv.textContent = contenus[0];
+
+        document.querySelectorAll('.tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(function(t) {
+                    t.classList.remove('actif');
+                });
+                tab.classList.add('actif');
+                const index = parseInt(tab.dataset.index);
+                contenuDiv.textContent = contenus[index];
+            });
+        });
+
+        document.querySelector('.tab').classList.add('actif');
+    </script>
+</body>
+</html>
