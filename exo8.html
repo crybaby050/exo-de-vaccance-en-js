@@ -107,27 +107,25 @@
         ];
 
         let html = '<div class="tabs">';
-        onglets.forEach(function(nom, i) {
-            html += `<div class="tab" data-index="${i}">${nom}</div>`;
-        });
-        html += '</div><div class="contenu-tab" id="contenu"></div>';
+        onglets.forEach((nom,i)=>{
+            html += `<div class="tab" data-index="${i}">${nom}</div>`
+        })
+        html += '</div><div id="contenu-onglets" class="contenu-tab"></div>';
         zone.innerHTML = html;
-
-        const contenuDiv = document.getElementById('contenu');
+        const contenuDiv = document.getElementById('contenu-onglets');
         contenuDiv.textContent = contenus[0];
-
-        document.querySelectorAll('.tab').forEach(function(tab) {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.tab').forEach(function(t) {
-                    t.classList.remove('actif');
-                });
-                tab.classList.add('actif');
-                const index = parseInt(tab.dataset.index);
+        const tabs = document.querySelectorAll('.tab')
+        tabs.forEach((e)=>{
+            e.addEventListener('click',()=>{
+                tabs.forEach(ta =>{
+                    ta.classList.remove('actif')
+                })
+                e.classList.add('actif')
+                const index = parseInt(e.dataset.index);
                 contenuDiv.textContent = contenus[index];
-            });
-        });
-
-        document.querySelector('.tab').classList.add('actif');
+            })
+        })
+        //tabs.classList.add('actif');
     </script>
 </body>
 </html>
