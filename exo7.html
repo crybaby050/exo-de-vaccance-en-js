@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 5 - Liste interactive avec sélection</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eaecef;
+        }
+
+        h1 {
+            color: #0d1117;
+            margin-bottom: 20px;
+        }
+
+        .consignes {
+            background: #f6f8fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #0969da;
+        }
+
+        .consignes ul {
+            margin-left: 20px;
+            color: #24292f;
+        }
+
+        .consignes li {
+            margin: 8px 0;
+        }
+
+        button {
+            background: #0969da;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background: #0960c0;
+        }
+
+        .liste-item {
+            padding: 12px 15px;
+            margin: 5px 0;
+            background: #f6f8fa;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid #eaecef;
+        }
+
+        .liste-item:hover {
+            background: #eaecef;
+        }
+
+        .liste-item.selectionne {
+            background: #0969da;
+            color: white;
+            border-color: #0969da;
+        }
+
+        .solution {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eaecef;
+        }
+
+        .solution details {
+            background: #f6f8fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .solution pre {
+            background: #1e1e2e;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Exercice 5 : Liste interactive avec sélection</h1>
+
+        <div class="consignes">
+            <strong>Consignes :</strong>
+            <ul>
+                <li>Au clic sur un élément de la liste, il doit devenir sélectionné (classe "selectionne")</li>
+                <li>Un seul élément peut être sélectionné à la fois</li>
+                <li>Le bouton "Supprimer sélectionné" retire l'élément sélectionné</li>
+                <li>Le bouton "Ajouter" ouvre un prompt pour ajouter un nouvel élément</li>
+            </ul>
+        </div>
+
+        <button id="btn-ajouter">Ajouter</button>
+        <button id="btn-supprimer">Supprimer sélectionné</button>
+
+        <div id="liste">
+            <div class="liste-item">Élément 1</div>
+            <div class="liste-item">Élément 2</div>
+            <div class="liste-item">Élément 3</div>
+        </div>
+
+
+
+        <script>
+            // À compléter par l'élève
+            const liste = document.getElementById('liste');
+            const btnAjouter = document.getElementById('btn-ajouter');
+            const btnSupprimer = document.getElementById('btn-supprimer');
+
+            //const items = document.querySelectorAll('.liste-item')
+            let cpt = 3
+            function ajoutElement() {
+                cpt++
+                const elem = document.createElement('div')
+                elem.textContent = `Élément ${cpt}`
+                elem.classList.add('liste-item')
+                liste.appendChild(elem)
+            }
+            btnAjouter.addEventListener('click', ajoutElement)
+            
+            liste.addEventListener('click', (e) => {
+                if (e.target.matches('.liste-item')) {
+                    document.querySelectorAll('.liste-item').forEach(it => {
+                        it.classList.remove('selectionne')
+                    })
+                    e.target.classList.add('selectionne')
+                }
+            })
+
+
+            btnSupprimer.addEventListener('click', () => {
+                const btnSup = document.querySelector('.liste-item.selectionne')
+                if (btnSup) {
+                    btnSup.remove()
+                }
+            })
+        </script>
+</body>
+
+</html>
