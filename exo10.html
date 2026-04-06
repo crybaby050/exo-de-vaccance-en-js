@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 8 - Galerie d'images</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eaecef;
+        }
+
+        h1 {
+            color: #0d1117;
+            margin-bottom: 20px;
+        }
+
+        .consignes {
+            background: #f6f8fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #0969da;
+        }
+
+        .consignes ul {
+            margin-left: 20px;
+            color: #24292f;
+        }
+
+        .consignes li {
+            margin: 8px 0;
+        }
+
+        button {
+            background: #0969da;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background: #0960c0;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .gallery img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .grande-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .solution {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eaecef;
+        }
+
+        .solution details {
+            background: #f6f8fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .solution pre {
+            background: #1e1e2e;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Exercice 8 : Galerie d'images</h1>
+
+        <div class="consignes">
+            <strong>Consignes :</strong>
+            <ul>
+                <li>Créez une galerie d'images à partir du tableau "images"</li>
+                <li>Chaque miniature doit être cliquable</li>
+                <li>Au clic sur une miniature, la grande image s'affiche en dessous</li>
+                <li>Ajoutez un bouton "Ajouter une image" qui ajoute une nouvelle miniature (URL via prompt)</li>
+                <li>Utilisez la délégation d'événements pour gérer les clics sur les miniatures</li>
+            </ul>
+        </div>
+
+        <button id="btn-ajouter">Ajouter une image</button>
+
+        <div id="galerie" class="gallery"></div>
+        <div id="grande-image"></div>
+
+
+        <script>
+            // À compléter par l'élève
+            const galerie = document.getElementById('galerie');
+            const grandeImageDiv = document.getElementById('grande-image');
+            const btnAjouter = document.getElementById('btn-ajouter');
+
+            let images = [
+                'https://picsum.photos/id/1/100/100',
+                'https://picsum.photos/id/2/100/100',
+                'https://picsum.photos/id/3/100/100'
+            ];
+
+            function ajouterImage(url) {
+                const im = document.createElement('img');
+                im.setAttribute('src', url);
+                im.setAttribute('alt', 'Image');
+                galerie.appendChild(im);
+
+                im.addEventListener('click', () => {
+                    const clone = im.cloneNode();
+                    clone.className = 'grande-image';
+                    grandeImageDiv.innerHTML = '';
+                    grandeImageDiv.appendChild(clone);
+                });
+            }
+
+            // Afficher les images de départ
+            images.forEach(url => ajouterImage(url));
+
+            // Bouton ajouter
+            btnAjouter.addEventListener('click', () => {
+                const nouveau = prompt("Entrer l'url de la nouvelle image :");
+                if (nouveau) {
+                    images.push(nouveau);
+                    ajouterImage(nouveau); // affiche ET ajoute l'écouteur
+                }
+            });
+        </script>
+</body>
+
+</html>
